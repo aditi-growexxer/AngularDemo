@@ -1,0 +1,56 @@
+<div class="container">
+  <h1 class="title">CRUD Application</h1>
+
+  <!-- Add Item Form -->
+  <div class="add-item-form">
+    <h3>Add Item</h3>
+    <form (ngSubmit)="addItem()">
+      <div class="form-group">
+        <label for="name">Item Name</label>
+        <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" [(ngModel)]="description" name="description" class="form-control" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Item</button>
+    </form>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+
+  <!-- Update Item Form -->
+  <div class="form-container">
+    <h3>Update Item</h3>
+    <div class="form-group">
+      <input type="number" [(ngModel)]="updateId" class="form-control" placeholder="Item ID" required>
+    </div>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="updateName" class="form-control" placeholder="Updated Name" required>
+    </div>
+    <div class="form-group">
+      <textarea [(ngModel)]="updateDescription" class="form-control" placeholder="Updated Description" required></textarea>
+    </div>
+    <button (click)="updateItem()" class="btn btn-success">Update Item</button>
+  </div>
+
+  <!-- Display Items -->
+  <div class="items-list">
+    <h3>All Items</h3>
+    <ul class="list-group">
+      <li *ngFor="let item of items" class="list-group-item d-flex justify-content-between align-items-center">
+        <span>{{ item.name }} - {{ item.description }}</span>
+        <button (click)="deleteItem(item.id)" class="btn btn-danger btn-sm">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
